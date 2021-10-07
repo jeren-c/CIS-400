@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "91289865666",
+    "project_id": "guardian-43bc9",
+    "storage_bucket": "guardian-43bc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91289865666:android:02c572726cedf050ae9a5b",
+        "android_client_info": {
+          "package_name": "edu.syr.guardian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91289865666-t0g2qkobm5oe0bi45v3gtgmjqgu0c54i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB06oKoIypx1tf1BKFRE77LVoyTcn0_rd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91289865666-t0g2qkobm5oe0bi45v3gtgmjqgu0c54i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
