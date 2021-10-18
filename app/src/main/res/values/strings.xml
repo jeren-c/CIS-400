@@ -20,4 +20,6 @@
     <string name="phone">Phone</string>
     <string name="show_a_map_here">Show a map here</string>
     <string name="log_out">Log out</string>
+    <string name="show_map">Show Map</string>
+    <string name="map_key">AIzaSyA0jCCGKXsVfH3ijpClC41z3-tPHjgtoD4</string>
 </resources>
