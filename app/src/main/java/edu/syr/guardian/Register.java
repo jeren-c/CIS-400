@@ -25,6 +25,7 @@ public class Register extends AppCompatActivity {
     TextView mLoginButton;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
+    Button mCheatButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class Register extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
         mLoginButton = findViewById(R.id.register_textview_bottom);
+        mCheatButton = findViewById(R.id.cheat_button);
 
         // If the user has already logged in, send them to main activity directly
         if(fAuth.getCurrentUser() != null){
@@ -92,6 +94,14 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+            }
+        });
+
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
