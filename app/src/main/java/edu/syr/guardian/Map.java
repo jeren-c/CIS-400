@@ -11,15 +11,19 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class Map extends FragmentActivity implements OnMapReadyCallback {
 
@@ -51,6 +55,9 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
     public static final int LOCATION_PERMISSION_REQUEST_CODE  = 1234;
     private static String FINE_LOCATION =  Manifest.permission.ACCESS_FINE_LOCATION;
     private boolean mLocationPermissionGranted =  false;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private Location mLastLocation;
+    private FusedLocationProviderClient mFusedLocationClient;
     GoogleMap mMap;
 
     @Override
@@ -59,8 +66,33 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map);
         //check for permission
         getLocationPermission();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        getLocation();
         Log.d(TAG, "inside onCreate");
         initMap();
+    }
+
+    private void getLocation() {
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        } else {
+            //Log.d(TAG, "getLocation: permissions granted");
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        mLastLocation = location;
+                        LatLng FromSensor = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(FromSensor).title("Real Location"));
+                    }
+                }
+            });
+        }
     }
 
     private void initMap()
@@ -108,6 +140,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         mMap =  googleMap;
         LatLng TechCtr = new LatLng(43.03760745511544, -76.13050018452081);
         LatLng HoL = new LatLng(43.03878212486239, -76.13454515767154);
+        getLocation();
         mMap.addMarker(new MarkerOptions().position(TechCtr).title("My Location"));
         mMap.addMarker(new MarkerOptions().position(HoL).title("User Location"));
         Log.d(TAG, "Marked added");
