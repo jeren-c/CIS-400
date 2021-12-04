@@ -22,4 +22,11 @@
     <string name="log_out">Log out</string>
     <string name="show_map">Show Map</string>
     <string name="map_key">AIzaSyA0jCCGKXsVfH3ijpClC41z3-tPHjgtoD4</string>
+    <string name="yuhao_chen">Yuhao Chen</string>
+    <string name="open" />
+    <string name="close" />
+    <string name="ambient_temperature">Ambient Temperature</string>
+    <string name="label_temp">%1$.2f °C</string>
+    <string name="heart_rates">Heart Rates</string>
+    <string name="to_be_collected">To be collected</string>
 </resources>

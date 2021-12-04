@@ -89,6 +89,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
                         mLastLocation = location;
                         LatLng FromSensor = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(FromSensor).title("Real Location"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(FromSensor));
                     }
                 }
             });
@@ -140,7 +141,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         mMap =  googleMap;
         LatLng TechCtr = new LatLng(43.03760745511544, -76.13050018452081);
         LatLng HoL = new LatLng(43.03878212486239, -76.13454515767154);
-        getLocation();
         mMap.addMarker(new MarkerOptions().position(TechCtr).title("My Location"));
         mMap.addMarker(new MarkerOptions().position(HoL).title("User Location"));
         Log.d(TAG, "Marked added");
