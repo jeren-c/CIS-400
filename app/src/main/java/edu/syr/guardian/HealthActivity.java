@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class HealthActivity extends AppCompatActivity implements SensorEventListener {
 
     private TextView tempTextView;
+    private TextView tempWarningTextView;
     private SensorManager sensorManager;
     private Sensor tempSensor;
     private boolean isTempSensorAvailable;
@@ -26,6 +27,7 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         isTempSensorAvailable = false;
 
         tempTextView = findViewById(R.id.tempTextView);
+        tempWarningTextView = findViewById(R.id.tempWarningTextView);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         if (sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null){
@@ -40,14 +42,14 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         float currentValue = event.values[0];
         tempTextView.setText(getResources().getString(
                 R.string.label_temp, currentValue));
-        if (event.values[0] < 10){
-            Toast.makeText(getApplicationContext(), "Temperature too low!", Toast.LENGTH_SHORT).show();
+        if (event.values[0] < 10.0){
+            tempWarningTextView.setText("Temperature is too low!");
             isTempSensorAvailable = true;
-        }
-
-        if (event.values[0] > 35){
-            Toast.makeText(getApplicationContext(), "Temperature too high!", Toast.LENGTH_SHORT).show();
+        }else if (event.values[0] > 35.0){
+            tempWarningTextView.setText("Temperature is too high!");
             isTempSensorAvailable = false;
+        } else {
+            tempWarningTextView.setText("Temperature is all right!");
         }
     }
 

@@ -29,4 +29,5 @@
     <string name="label_temp">%1$.2f °C</string>
     <string name="heart_rates">Heart Rates</string>
     <string name="to_be_collected">To be collected</string>
+    <string name="temp_warning">Temp Warning</string>
 </resources>
